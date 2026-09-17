@@ -12,7 +12,7 @@ const Register = () => {
 
             <div className="input-group">
                 <label htmlFor="email">Username</label>
-                <input type="email" id='email' name='email' placeholder='Enter your email' />
+                <input type="text" id='username' name='username' placeholder='Enter your email' />
             </div>
             <div className="input-group">
                 <label htmlFor="email">Email</label>
