@@ -2,6 +2,8 @@ import usermodel from "../model/user.model.js";
 import bcrypt from "bcryptjs"
 import jwt from 'jsonwebtoken'
 import blacklistModel from "../model/Blacklist.model.js";
+import authMiddleware from "../middleware/auth.middleware.js";
+
 
 const RegisterUser=async(req,res)=>{
     const {username,email,password}=req.body;
@@ -96,6 +98,19 @@ const LogoutUser=async(req,res)=>{
     })
 }
 
+const getmeUser=async(req,res)=>{
+    const user=await usermodel.findById(req.user.id)
+
+    res.status(200).json({
+        message:"User details fetched successfully",
+        user:{
+            id:user._id,
+            username:user.username,
+            email:user.email, 
+        }
+    })
+
+}
 
 
-export default {RegisterUser,LoginUser,LogoutUser}
+export default {RegisterUser,LoginUser,LogoutUser,getmeUser}
