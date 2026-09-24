@@ -32,7 +32,7 @@ export async function login({email,password}) {
 export async function logout() {
     try {
         const response=await api.post('/api/auth/logout',)
-        return (await response).data
+        return response.data
     } catch (err) {
         console.log(err);
         
@@ -40,10 +40,11 @@ export async function logout() {
 }
 export async function getme() {
     try {
-        const response=await api.get('/api/auth/getme')
-        return (await response).data
+        const response=await api.get('/api/auth/get-me')
+        return response.data
     } catch (err) {
         console.log(err);
+        throw err
         
     }
 }

@@ -1,11 +1,14 @@
 import { createContext,useState } from "react";
+import { getme } from "./services/auth.api.js";
 
 export const AuthContext=createContext()
 
 export const Authprovider=({children})=>{
 
     const [user, setUser] = useState(null)
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(true)
+
+    
     
 
     return(

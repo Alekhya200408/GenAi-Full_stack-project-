@@ -26,22 +26,22 @@ const Register = () => {
         <form onSubmit={handleSubmit}>
 
             <div
-            onChange={(e)=>setUsername(e.target.value)}
+            
             className="input-group">
                 <label htmlFor="email">Username</label>
-                <input type="text" id='username' name='username' placeholder='Enter your Username' />
+                <input type="text" id='username' name='username' placeholder='Enter your Username' onChange={(e)=>setUsername(e.target.value)}/>
             </div>
             <div 
-            onChange={(e)=>setEmail(e.target.value)}
+            
             className="input-group">
                 <label htmlFor="email">Email</label>
-                <input type="email" id='email' name='email' placeholder='Enter your email' />
+                <input type="email" id='email' name='email' placeholder='Enter your email' onChange={(e)=>setEmail(e.target.value)} />
             </div>
             <div
-            onChange={(e)=>(e.target.value)}
+            onChange={(e)=>setPassword(e.target.value)}
             className="input-group">
                 <label htmlFor="password">Password</label>
-                <input type="password" id='password' name='password' placeholder='Enter your password' />
+                <input type="password" id='password' name='password' placeholder='Enter your password' onChange={(e)=>setPassword(e.target.value)}/>
             </div>
             <button className='button primary-button'>Register</button>
         </form>
