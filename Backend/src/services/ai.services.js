@@ -9,7 +9,6 @@ const ai=new GoogleGenAI({
 
 const invokeGeminiAI=async () => {
     const response=await ai.models.generateContent({
-        
         model:"gemini-3.6-flash",
         contents:"Hello Gemini!Explain What is Interview"
     })
