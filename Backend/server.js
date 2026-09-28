@@ -2,11 +2,11 @@ import express from 'express'
 import app from './app.js'
 import { config } from 'dotenv';
 import DBconn from './src/DB/dbConn.js';
-import invokeGeminiAI from './src/services/ai.services.js';
 
 config()
-DBconn()
-invokeGeminiAI()
+
+await DBconn()
+
 
 
 app.listen(3000,()=>{
