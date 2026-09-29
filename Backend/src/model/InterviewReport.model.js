@@ -70,7 +70,7 @@ const PreparationPlanSchema=new Schema({
         required:[true,'focus is required']
     },
     tasks:{
-        type:String,
+        type:[String],
         required:[true,"Task is required"]
     }
 })
@@ -87,15 +87,19 @@ const InterviewReportSchema=new Schema({
         type:String
     },
 
-    MatchScore:{
+    matchScore:{
         type:Number,
         min:0,
         max:100
     },
     technicalQuestions:[TechnicalQuestionScheema],
     behavioralQuestions:[BehavioralQuestionScheema],
-    skillgaps:[SkillGapSchema],
-    preparationplan:[PreparationPlanSchema]
+    skillGaps:[SkillGapSchema],
+    preparationPlan:[PreparationPlanSchema],
+    user:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"user"
+    }
 },{
     timestamps:true
 })

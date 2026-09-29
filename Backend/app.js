@@ -1,5 +1,6 @@
 import express, { urlencoded } from 'express'
 import authrouter from './src/routes/auth.route.js';
+import InterviewRouter from './src/routes/interview.routes.js';
 import cookieParser from 'cookie-parser';
 import cors from "cors"
 
@@ -14,6 +15,7 @@ app.use(cors({
 }))
 
 app.use('/api/auth',authrouter)
+app.use('/api/interview',InterviewRouter)
 
 
 

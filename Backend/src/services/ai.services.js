@@ -10,7 +10,18 @@ const ai = new GoogleGenAI({
 })
 
 const interviewReportSchema = z.object({
-    matchScore: z.number().describe("A score between 0 and 100 indicating how well the candidate's profile matches the job describe"),
+    matchScore: z.number()
+    .int()
+    .min(0)
+    .max(100)
+    .describe(
+        "Calculate the candidate's match percentage for the job. " +
+        "The candidate has strong matches including JavaScript, HTML, CSS, React.js, " +
+        "Node.js, Express.js, MongoDB, REST APIs, JWT authentication, Git and GitHub. " +
+        "The job is a Full Stack Developer role. " +
+        "Return a realistic integer percentage between 1 and 100. " +
+        "Do not return 0 when the candidate has relevant skills."
+    ),
     technicalQuestions: z.array(z.object({
         question: z.string().describe("The technical question can be asked in the interview"),
         intention: z.string().describe("The intention of interviewer behind asking this question"),
@@ -35,11 +46,28 @@ const interviewReportSchema = z.object({
 
 const generateInterviewReport = async (Resume, SelfDescription, JobDescription) => {
 
-    const prompt = `Generate an interview report for a candidate with the following details:
-                        Resume: ${Resume}
-                        Self Description: ${SelfDescription}
-                        Job Description: ${JobDescription}
-`
+    const prompt = `Generate an interview report for a candidate.
+
+Candidate Resume:
+${Resume}
+
+Candidate Self Description:
+${SelfDescription}
+
+Job Description:
+${JobDescription}
+
+Instructions:
+- Analyze the candidate's resume and self-description against the job description.
+- Calculate matchScore as an integer from 0 to 100.
+- The matchScore must represent how well the candidate's skills, experience, education and projects match the job requirements.
+- Consider both required skills and good-to-have skills.
+- A candidate who matches most of the required skills should receive a correspondingly high score.
+- Do not automatically give a score of 0 unless the candidate has essentially no relevant match.
+- Identify realistic skill gaps based on the job requirements.
+- Generate relevant technical and behavioral interview questions.
+- Generate a practical day-wise preparation plan.
+`;
     try {
         const response = await ai.models.generateContent({
             model: "gemini-3.1-flash-lite",
@@ -52,9 +80,17 @@ const generateInterviewReport = async (Resume, SelfDescription, JobDescription) 
             }
         })
 
+    //     console.log("RAW GEMINI TEXT:");
+    // console.log(response.text);
 
-        return JSON.parse(response.text)
-        
+
+        const report = JSON.parse(response.text);
+
+    // console.log("===== GEMINI RESPONSE =====");
+    // console.log(report);
+    // console.log("GEMINI MATCH SCORE:", report.matchScore);
+
+    return report;
 
 
     } catch (error) {
