@@ -1,22 +1,27 @@
 import React from 'react'
+import '../Pages/style.scss'
 
 const Home = () => {
   return (
     <main className="home">
+        <div className="interview-input-group">
         <div className="left">
-            <textarea name="jobDescription" id="jobDescription" placeholder='Enter Job Description hera'></textarea>
+            <label htmlFor="job-Description">Job Description</label>
+            <textarea name="jobDescription" id="jobDescription" placeholder='Enter Job Description here'></textarea>
         </div>
 
         <div className="right">
             <div className="input-group">
-                <label htmlFor="resume">Upload Resume</label>
-                <input type="file" name='resume' id='resume' accept='.pdf' />
+                <p>Resume <small className='highlight'>(Use Resume and Self-Description together for best result)</small></p>
+                <label className='file-label' htmlFor="resume">Upload Resume</label>
+                <input hidden type="file" name='resume' id='resume' accept='.pdf' />
             </div>
             <div className="input-group">
                 <label htmlFor="SelfDescription">Self Description</label>
                <textarea name="selfDescription" id="selfDescription" placeholder='Describe Yourself'></textarea>
             </div>
-            <button className='generate-btn'>Generate interview Report</button>
+            <button className='button primary-button'>Generate interview Report</button>
+        </div>
         </div>
     </main>
   )
